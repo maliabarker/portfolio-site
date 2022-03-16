@@ -1,0 +1,12 @@
+body {
+    background-color: #121212
+}
+
+nav {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)), #121212;;
+}
+
+#nav-contact {
+    color: black;
+    background-color: #F5C289;
+}
