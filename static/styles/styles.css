@@ -3,10 +3,29 @@ body {
 }
 
 nav {
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)), #121212;;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)), #121212;
 }
 
 #nav-contact {
     color: black;
     background-color: #F5C289;
+}
+
+footer {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)), #121212;
+}
+
+/* ———————————————————————ABOUT PAGE——————————————————————————————————————————————————————————————————————— */
+
+#about-title {
+    color: #F19E4B;
+}
+
+/* ———————————————————————BLOG PAGE——————————————————————————————————————————————————————————————————————— */
+#blog-sidebar {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)), #121212;
+}
+
+#blog-post {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)), #121212;
 }

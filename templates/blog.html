@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %} Malia Barker {% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <!-- TODO Need to make sure it starts at edge of page and spans all the way down -->
+            <div class="col-md-3" id="blog-sidebar">
+                <nav class="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item mx-2">
+                            <!-- TODO need to be drop downs -->
+                            <a class="nav-link h4" href="#">Data Science</a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <!-- TODO need to be drop downs -->
+                            <a class="nav-link h4" href="#">Web Development</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-md-9 ml-auto my-auto" id="blog-post">
+                <!-- Jinja for loop for blog posts 
+                How to do check if clicked on ds or wd? 
+                And then show blog posts accordingly -->
+                <h3>Title of Blog Post</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
