@@ -13,6 +13,7 @@ nav {
 
 footer {
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)), #121212;
+    color: #c0bfbf;
 }
 
 /* ———————————————————————ABOUT PAGE——————————————————————————————————————————————————————————————————————— */
@@ -23,9 +24,10 @@ footer {
 
 /* ———————————————————————BLOG PAGE——————————————————————————————————————————————————————————————————————— */
 #blog-sidebar {
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)), #121212;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), #121212;
 }
 
 #blog-post {
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)), #121212;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), #121212;
+    color: white;
 }

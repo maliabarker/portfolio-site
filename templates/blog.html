@@ -1,30 +1,50 @@
 {% extends 'base.html' %}
 {% block title %} Malia Barker {% endblock %}
 {% block content %}
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <!-- TODO Need to make sure it starts at edge of page and spans all the way down -->
-            <div class="col-md-3" id="blog-sidebar">
-                <nav class="navbar">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item mx-2">
-                            <!-- TODO need to be drop downs -->
-                            <a class="nav-link h4" href="#">Data Science</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <!-- TODO need to be drop downs -->
-                            <a class="nav-link h4" href="#">Web Development</a>
-                        </li>
-                    </ul>
-                </nav>
+            <div class="col-md-3" id="blog-sidebar" style="height: 100vh;">
+                <div class="navbar navbar-dark mt-4">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ds" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="h4">Data Science</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="collapse" id="ds">
+                    <div class="p-4 ml-2">
+                        <p class="text-white">Collapsed content</p>
+                    </div>
+                </div>
+
+                <div class="navbar navbar-dark">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#wd" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="h4">Web Development</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="collapse" id="wd">
+                    <div class="p-4 ml-2">
+                        <p class="text-white">Collapsed content</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-9 ml-auto my-auto" id="blog-post">
+
+            <div class="col-md-7 col-offset-1 ml-auto my-auto" id="blog-post">
                 <!-- Jinja for loop for blog posts 
                 How to do check if clicked on ds or wd? 
                 And then show blog posts accordingly -->
                 <h3>Title of Blog Post</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
             </div>
+            <div class="col-md-1">
+
+            </div>
         </div>
     </div>
+    {% include 'partials/footer.html' %}
 {% endblock %}
