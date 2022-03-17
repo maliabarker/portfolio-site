@@ -1,7 +1,6 @@
 body {
     background-color: #121212;
     max-height: 100vh;
-    overflow: hidden;
 }
 
 nav {
@@ -48,13 +47,16 @@ hr {
     height: auto;
 }
 
-#home-icons a i:hover {
+a i:hover {
     color: #F5C289;
     cursor: pointer;
 }
 
 #home-icons a i {
     font-size: 4rem;
+}
+
+a i {
     color: white;
 }
 
@@ -62,6 +64,11 @@ hr {
 
 #about-title {
     color: #F19E4B;
+}
+
+#about-text {
+    color: white;
+    line-height: 30px;
 }
 
 /* ———————————————————————BLOG PAGE——————————————————————————————————————————————————————————————————————— */

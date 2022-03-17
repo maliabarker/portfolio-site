@@ -1,14 +1,24 @@
 {% extends 'base.html' %}
 {% block title %} Malia Barker {% endblock %}
 {% block content %}
+
+{# WILL BE USED WHEN I PUT BLOG POSTS INTO DATABASE
+{% set blog_posts = [
+    {% for post in posts %}
+        (section = post_section, title = post_title, text = post_text, date = post_date, tags = post_tags, link = post_link)
+    {% endfor %}
+] -%}
+{% set active_post = page_title|default('whateverIWant') -%}
+#}
+
     <div class="container-fluid">
         <div class="row">
             <!-- TODO Need to make sure it starts at edge of page and spans all the way down -->
             <div class="col-md-3" id="blog-sidebar" style="height: 100vh;">
                 <div class="navbar navbar-dark mt-4">
                     <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ds" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="h4">Data Science</span>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ds" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" style="border:none;">
+                            <span class="h4"><i class="fa-solid fa-caret-right"></i> Data Science</span>
                         </button>
                     </div>
                 </div>
@@ -21,8 +31,8 @@
 
                 <div class="navbar navbar-dark">
                     <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#wd" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="h4">Web Development</span>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#wd" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" style="border:none;">
+                            <span class="h4"><i class="fa-solid fa-caret-right"></i> Web Development</span>
                         </button>
                     </div>
                 </div>
@@ -34,12 +44,25 @@
                 </div>
             </div>
 
-            <div class="col-md-7 col-offset-1 ml-auto my-auto" id="blog-post">
+            <div class="col-md-7 col-offset-1 ml-auto mt-5 mb-5 py-4 px-5" id="blog-post">
                 <!-- Jinja for loop for blog posts 
                 How to do check if clicked on ds or wd? 
                 And then show blog posts accordingly -->
-                <h3>Title of Blog Post</h3>
+                <h2 class="pb-3" >Title of Blog Post</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                <a href="">
+                    <p><u>Read More ...</u></p>
+                </a>
+                <div class="blog-footer container">
+                    <div class="row d-flex justify-content-center">
+                        <p>🗓</p>
+                        <p>📁</p>
+                        <p>🏷</p>
+                    </div>
+                    <a href="">
+                        <p><u>link</u></p>
+                    </a>
+                </div>
             </div>
             <div class="col-md-1">
 

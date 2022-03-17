@@ -3,11 +3,11 @@
 {% block title %} Malia Barker {% endblock %}
 {% block head %} <link rel="stylesheet" type= "text/css" href= "{{ url_for('static', filename='styles/astronaut.css') }}"> {% endblock %}
 {% block content %}
-    <div class="container">
+    <div class="container-fluid ml-5 pl-5" style="overflow:hidden;">
         <div class="row">
-            <div class="col-md-6 mt-5">
-                <h3 id="about-title">My Passion and Drive</h3>
-                <p> I am a data analyst, web developer, and student based in Northern California. <br>
+            <div class="col-md-6 mt-5 ml-4">
+                <h3 id="about-title" class="mb-4">My Passion and Drive</h3>
+                <p id="about-text" class="mt-4"> I am a data analyst, web developer, and student based in Northern California. <br>
 
                     I have a passion for astronomy and physics, publishing my first paper in astronomy at just 17 years old. <br>
                     
@@ -23,7 +23,7 @@
                     
                     And let's make something ground-breaking</p>
             </div>
-            <div class="col-md-6 mt-5 pl-5">
+            <div class="col-md-5 mt-5 pl-5" style="left:90px;">
                 <div class="backg">
                     <div class="planet">
                         <div class="r1"></div>

@@ -2,7 +2,11 @@
 {% block title %} Malia Barker {% endblock %}
 {% block content %}
     <div class="container">
-        
+        {% if logged_in == True %}
+            <p>Logged in as</p>
+        {% else %}
+            <p>Not logged in</p>
+        {% endif %}
     </div>
     {% include 'partials/footer.html' %}
 {% endblock %}
