@@ -1,5 +1,6 @@
 body {
-    background-color: #121212
+    background-color: #121212;
+    min-height: 100vh;
 }
 
 nav {
@@ -15,6 +16,31 @@ footer {
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)), #121212;
     color: #c0bfbf;
 }
+
+/* ———————————————————————HOME PAGE——————————————————————————————————————————————————————————————————————— */
+#ugh:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-top: 1px solid black;
+    background: black;
+    width: 100%;
+    transform: translateY(-50%);
+}
+
+hr {
+    z-index: -1;
+    border-top: 1px solid #808080;
+    bottom: 200px;
+}
+
+#pfp {
+    width: 400;
+    height: auto;
+}
+
+
 
 /* ———————————————————————ABOUT PAGE——————————————————————————————————————————————————————————————————————— */
 

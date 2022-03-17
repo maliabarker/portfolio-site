@@ -1,7 +1,24 @@
 {% extends 'base.html' %}
 {% block title %} Malia Barker {% endblock %}
 {% block content %}
-    <div class="container">
-        
+    <div class="d-flex" id="ugh">
+        <div class="container">
+            <div class="row" style="min-height:90vh;">
+                <div class="col-md-6 align-items-center">
+                    <p>Hello,</p>
+                    <div class="row">
+                        <h2>I am &nbsp;</h2>
+                        <h1> Malia Barker</h1>
+                    </div>
+                    <h5>Data Analyst and Web Developer</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                </div>
+                <div class="col-md-5 offset-md-1 d-inline-flex align-items-end">
+                    <img src="{{url_for('static', filename='images/pp.png')}}" id="pfp" width="400px" height="501px">
+                </div>
+            </div>
+        </div>
     </div>
+    
+    
 {% endblock %}
