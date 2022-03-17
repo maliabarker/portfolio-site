@@ -1,6 +1,7 @@
 body {
     background-color: #121212;
-    min-height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
 }
 
 nav {
@@ -12,21 +13,28 @@ nav {
     background-color: #F5C289;
 }
 
+#top-navbar .active a {
+    color: #F19E4B;
+}
+
 footer {
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)), #121212;
     color: #c0bfbf;
 }
 
 /* ———————————————————————HOME PAGE——————————————————————————————————————————————————————————————————————— */
-#ugh:before {
+#home-container:before {
     content: '';
     position: absolute;
-    top: 50%;
+    top: 75%;
     left: 0;
-    border-top: 1px solid black;
-    background: black;
+    border-top: 3px solid #808080;
     width: 100%;
     transform: translateY(-50%);
+}
+
+#home-text {
+    color: white;
 }
 
 hr {
@@ -40,7 +48,15 @@ hr {
     height: auto;
 }
 
+#home-icons a i:hover {
+    color: #F5C289;
+    cursor: pointer;
+}
 
+#home-icons a i {
+    font-size: 4rem;
+    color: white;
+}
 
 /* ———————————————————————ABOUT PAGE——————————————————————————————————————————————————————————————————————— */
 

@@ -18,7 +18,7 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav ml-auto" id="top-navbar">
             {% for href, id, caption in navigation_bar %}
                 <li {% if id == active_page %} class="nav-item active mx-2" {% else %} class="nav-item mx-2" {% endif%} >
                     <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
