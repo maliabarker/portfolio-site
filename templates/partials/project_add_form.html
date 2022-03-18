@@ -1,0 +1,50 @@
+<form action="/skills" id="new_project" method="post">
+    <div class="form-group">
+        <label for="img_path">Image Path</label>
+        <input type="text" class="form-control" id="img_path" name="img_path">
+    </div>
+
+    <div class="form-group">
+        <label for="title">Project Title</label>
+        <input type="text" class="form-control" id="title" name="title">
+    </div>
+
+    <div class="form-group">
+        <label for="stack">Stack Used</label>
+        <input type="text" class="form-control" id="stack" name="stack">
+    </div>
+
+    <div class="form-group">
+        <label for="skills">Skills Learned or Used</label>
+        <input type="text" class="form-control" id="skills" name="skills">
+    </div>
+
+    <div class="form-group">
+        <label for="github">Github Link</label>
+        <input type="text" class="form-control" id="github" name="github">
+    </div>
+
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" onclick="javascript:radioCheck();" type="radio" name="type" id="ds" value="ds">
+        <label class="form-check-label" for="ds">Data Science Project</label>
+    </div>
+
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" onclick="javascript:radioCheck();" type="radio" name="type" id="live_app" value="live_app">
+        <label class="form-check-label" for="live_app">Live Application</label>
+    </div>
+
+    <div class="form-group" id="ifds" style="display:none">
+        <label for="kaggle">Kaggle Link</label>
+        <input type="text" class="form-control" id="kaggle" name="kaggle_link">
+    </div>
+
+    <div class="form-group" id="iflive_app" style="display:none">
+        <label for="live_link">Live Link</label>
+        <input type="text" class="form-control" id="live_link" name="live_link">
+    </div>
+
+    <button type="submit" form="new_project" class="btn btn-primary">Submit</button>
+</form>
+
+<script src="{{url_for('static', filename='js/radio.js')}}"></script>

@@ -2,69 +2,147 @@
 {% block title %} Malia Barker {% endblock %}
 {% block head %}<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='styles/carousel.css') }}">{% endblock %}
 {% block content %}
-    <div class="container">
-        <div class="slider-container">
+    <div class="container-fluid">
+        <div class="row ml-5">
+            <div class="col-md-3 ml-5 mt-5 text-center">
+                <h5 class="mt-5">Proficient Knowledge Of</h5>
+                <p> Languages: Python, Javascript <br>
+                Data Tools: Pandas, Numpy, MatPlotLib, Seaborn, SciKit Learn <br>
+                Web Frameworks: Flask <br>
+                Database Tools: MongoDB, PyMongo</p>
+                <h4>Showcased in the Following Projects</h4>
+                {% if logged_in == True %}
+                    <button class="btn my-2 my-sm-0" type="button" data-bs-toggle="modal" data-bs-target="#newProjectModal" id="nav-contact">Add Project</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="newProjectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add New Project</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    {% include 'partials/project_add_form.html' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <div class="slider-container">
+                    <div class="slider-content">
+                        {% for project in projects %}
+                            <div class="slider-single card text-center" style="display: flex; align-items: center;">
+                                <img class="slider-single-image card-img-top mt-3" src="{{ project.path }}" alt="1" style="width: 370px; height: 270px;"/>
+                                <h3 class="card-title mt-3 slider-single-title">{{ project.title }}</h3>
+                                {% if logged_in == True %}
+                                    <div class="row">
+                                        <form action="/{{ project._id }}/edit_project" id="edit_{{ project._id }}">
+                                            <button type="submit" form="edit_{{ project._id }}" class="btn my-2 my-sm-0 mr-2" id="nav-contact">Edit Project</button>
+                                        </form>
+                                        <form action="/{{ project._id }}/delete_project" id="delete_{{ project._id }}">
+                                            <button type="submit" form="delete_{{ project._id }}" class="btn my-2 my-sm-0 ml-2" id="nav-contact">Delete Project</button>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                                <p class="slider-single-title">Stack Used: {{ project.stack }}</p>
+                                <p class="mx-3 slider-single-title">Skills Learned: {{ project.skills }}</p>
+                                <div class="row slider-single-title">
+                                    <a href="{{ project.github }}">
+                                        <i class="fa-brands fa-github mx-3 h3"></i>
+                                    </a>
+                                    {% if post_type == ds %}
+                                    <a href="{{ project.kaggle_link }}">
+                                        <i class="fa-brands fa-kaggle mx-3 h3"></i>
+                                    </a>
+                                    {% elif post_type == live_app %}
+                                    <a href="{{ project.live_link }}">
+                                        <span class="iconify" data-icon="simple-icons:heroku"></span>
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
 
-            <div class="slider-content">
-        
-                <div class="slider-single">
-                    <img class="slider-single-image" src="https://picsum.photos/id/973/200/300" alt="1" />
-                    <h1 class="slider-single-title">Through the Mountains</h1>
-                    <a class="slider-single-likes" href="javascript:void(0);">
-                        <i class="fa fa-heart"></i>
-                        <p>1,247</p>
-                    </a>
-                </div>
-        
-                <div class="slider-single">
-                    <img class="slider-single-image" src="https://picsum.photos/id/974/200/300" alt="2" />
-                    <h1 class="slider-single-title">Through the Mountains</h1>
-                    <a class="slider-single-likes" href="javascript:void(0);">
-                        <i class="fa fa-heart"></i>
-                        <p>1,247</p>
-                    </a>
-                </div>
-        
-                <div class="slider-single">
-                    <img class="slider-single-image" src="https://picsum.photos/id/975/200/300" alt="3" />
-                    <h1 class="slider-single-title">Through the Mountains</h1>
-                    <a class="slider-single-likes" href="javascript:void(0);">
-                        <i class="fa fa-heart"></i>
-                        <p>1,247</p>
-                    </a>
-                </div>
-        
-        
-                <div class="slider-single">
-                    <img class="slider-single-image" src="https://picsum.photos/id/976/200/300" alt="4" />
-                    <h1 class="slider-single-title">Through the Mountains</h1>
-                    <a class="slider-single-likes" href="javascript:void(0);">
-                        <i class="fa fa-heart"></i>
-                        <p>1,247</p>
-                    </a>
-                </div>
-        
-        
-                <div class="slider-single">
-                    <img class="slider-single-image" src="https://picsum.photos/id/977/200/300" alt="5" />
-                    <h1 class="slider-single-title">Through the Mountains</h1>
-                    <a class="slider-single-likes" href="javascript:void(0);">
-                        <i class="fa fa-heart"></i>
-                        <p>1,247</p>
-                    </a>
-                </div>
-        
-                <div class="slider-single">
-                    <img class="slider-single-image" src="https://picsum.photos/id/978/200/300" alt="6" />
-                    <h1 class="slider-single-title">Through the Mountains</h1>
-                    <a class="slider-single-likes" href="javascript:void(0);">
-                        <i class="fa fa-heart"></i>
-                        <p>1,247</p>
-                    </a>
+                        <!-- single card -->
+                        <div class="slider-single card text-center" style="display: flex; align-items: center;">
+                            <img class="slider-single-image card-img-top mt-3" src="https://picsum.photos/id/973/200/300" alt="1" style="width: 370px; height: 270px;"/>
+                            <h3 class="card-title mt-3 slider-single-title">Project Title</h3>
+                            <p class="slider-single-title">Stack Used: HTML, CSS, JavaScript, Flask, MongoDB</p>
+                            <p class="mx-3 slider-single-title">Skills Learned: Authentication, jinja techniques, styling, detailed javascript functions</p>
+                            <div class="row slider-single-title">
+                                <a href="https://github.com/maliabarker">
+                                    <i class="fa-brands fa-github mx-3 h3"></i>
+                                </a>
+                                <a href="https://www.kaggle.com/maliabarker">
+                                    <i class="fa-brands fa-kaggle mx-3 h3"></i>
+                                </a>
+                                <a href="">
+                                    <span class="iconify h3" data-icon="simple-icons:heroku" id="heroku_icon"></span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="slider-single card text-center" style="display: flex; align-items: center;">
+                            <img class="slider-single-image card-img-top mt-3" src="https://picsum.photos/id/973/200/300" alt="1.5" style="width: 370px; height: 270px;"/>
+                            <h3 class="card-title mt-3 slider-single-title">Project Title</h3>
+                            <p class="slider-single-title">Stack Used: HTML, CSS, JavaScript, Flask, MongoDB</p>
+                            <p class="mx-3 slider-single-title">Skills Learned: Authentication, jinja techniques, styling, detailed javascript functions</p>
+                            <div class="row slider-single-title">
+                                <a href="https://github.com/maliabarker">
+                                    <i class="fa-brands fa-github mx-3 h3"></i>
+                                </a>
+                                <a href="https://www.kaggle.com/maliabarker">
+                                    <i class="fa-brands fa-kaggle mx-3 h3"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="slider-single card text-center" style="display: flex; align-items: center;">
+                            <img class="slider-single-image card-img-top mt-3" src="https://picsum.photos/id/973/200/300" alt="1.5" style="width: 370px; height: 270px;"/>
+                            <h3 class="card-title mt-3 slider-single-title">Project Title</h3>
+                            <p class="slider-single-title">Stack Used: HTML, CSS, JavaScript, Flask, MongoDB</p>
+                            <p class="mx-3 slider-single-title">Skills Learned: Authentication, jinja techniques, styling, detailed javascript functions</p>
+                            <div class="row slider-single-title">
+                                <a href="https://github.com/maliabarker">
+                                    <i class="fa-brands fa-github mx-3 h3"></i>
+                                </a>
+                                <a href="https://www.kaggle.com/maliabarker">
+                                    <i class="fa-brands fa-kaggle mx-3 h3"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="slider-single card text-center" style="display: flex; align-items: center;">
+                            <img class="slider-single-image card-img-top mt-3" src="https://picsum.photos/id/973/200/300" alt="1.5" style="width: 370px; height: 270px;"/>
+                            <h3 class="card-title mt-3 slider-single-title">Project Title</h3>
+                            <p class="slider-single-title">Stack Used: HTML, CSS, JavaScript, Flask, MongoDB</p>
+                            <p class="mx-3 slider-single-title">Skills Learned: Authentication, jinja techniques, styling, detailed javascript functions</p>
+                            <div class="row slider-single-title">
+                                <a href="https://github.com/maliabarker">
+                                    <i class="fa-brands fa-github mx-3 h3"></i>
+                                </a>
+                                <a href="https://www.kaggle.com/maliabarker">
+                                    <i class="fa-brands fa-kaggle mx-3 h3"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <script src="{{url_for('static', filename='js/carousel.js')}}"></script>
+    <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
+    <script src="{{url_for('static', filename='js/radio.js')}}"></script>
+    <!-- <script type="text/javascript">
+        function radioCheck() {
+            if (document.getElementById('yesCheck').checked) {
+                document.getElementById('ifYes').style.visibility = 'visible';
+            } else {
+                document.getElementById('ifYes').style.visibility = 'hidden';
+            }}
+    </script> -->
     {% include 'partials/footer.html' %}
 {% endblock %}

@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, request_started, session, redirect, url_for
 from flask_pymongo import pymongo
 import bcrypt
 import os
 import dotenv
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 
@@ -62,17 +63,81 @@ def about():
     # returns about page
     return render_template('about.html', page_title='about')
 
-@app.route('/skills', methods=['GET'])
+
+####### SKILLS #######
+@app.route('/skills', methods=['GET', 'POST'])
 def skills():
     # returns skills/projects page
     # able to CRUD projects
-    return render_template('skills.html', page_title='skills')
+    if request.method == 'POST':
+        project_type = request.form.get('type')
+        project = {
+            'path': request.form.get('img_path'),
+            'title': request.form.get('title'),
+            'stack': request.form.get('stack'),
+            'skills': request.form.get('skills'),
+            'github': request.form.get('github'),
+            'type': project_type
+        }
+        if project_type == 'ds':
+            project['kaggle_link'] = request.form.get('kaggle_link')
+        elif project_type == 'live_app':
+            project['live_link'] = request.form.get('live_link')
 
-@app.route('/blog', methods=['GET'])
+        projects.insert_one(project)
+
+    all_projects = projects.find()
+
+    return render_template('skills.html', page_title='skills', projects=all_projects)
+
+@app.route('/<project_id>/edit_project', methods=['GET', 'POST'])
+def edit_project(project_id):
+    '''Edit a project'''
+    project = projects.find_one({'_id': ObjectId(project_id)})
+    return render_template('edit_project.html', project=project)
+
+@app.route('/<project_id>/update_project', methods=['GET', 'POST'])
+def update_project(project_id):
+    '''Update a project'''
+    project_type = request.form.get('type')
+    updated_project = {
+        'path': request.form.get('img_path'),
+        'title': request.form.get('title'),
+        'stack': request.form.get('stack'),
+        'skills': request.form.get('skills'),
+        'github': request.form.get('github'),
+        'type': project_type
+    }
+    if project_type == 'ds':
+        updated_project['kaggle_link'] = request.form.get('kaggle_link')
+    elif project_type == 'live_app':
+        updated_project['live_link'] = request.form.get('live_link')
+    projects.update_one (
+        {'_id': ObjectId(project_id)},
+        {'$set': updated_project}
+    )
+    all_projects = projects.find()
+    return redirect(url_for('skills', page_title='skills', projects=all_projects))
+
+@app.route('/<project_id>/delete_project', methods=['GET', 'POST'])
+def delete_project(project_id):
+    '''Delete a project'''
+    projects.delete_one({'_id': ObjectId(project_id)})
+    return redirect(url_for('skills', page_title='skills'))
+####### END SKILLS #######
+
+
+####### BLOG #######
+@app.route('/blog', methods=['GET', 'POST'])
 def blog():
     # returns blog page
     # able to CRUD blog posts
     return render_template('blog.html', page_title='blog')
+
+
+
+
+####### END BLOG #######
 
 @app.route('/resume', methods=['GET'])
 def resume():

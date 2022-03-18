@@ -60,6 +60,15 @@ a i {
     color: white;
 }
 
+#heroku_icon {
+    color: white;
+}
+
+#heroku_icon:hover {
+    color: #F5C289;
+    cursor: pointer;
+}
+
 /* ———————————————————————ABOUT PAGE——————————————————————————————————————————————————————————————————————— */
 
 #about-title {
@@ -69,6 +78,16 @@ a i {
 #about-text {
     color: white;
     line-height: 30px;
+}
+
+/* ———————————————————————SKILLS PAGE——————————————————————————————————————————————————————————————————————— */
+#newProjectModal .modal-content {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), #121212;
+}
+
+#edit-project-container {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), #121212;
+    color: white;
 }
 
 /* ———————————————————————BLOG PAGE——————————————————————————————————————————————————————————————————————— */
