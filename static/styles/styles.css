@@ -99,3 +99,20 @@ a i {
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), #121212;
     color: white;
 }
+
+#blog-title {
+    font-size: 3.5em;
+    font-weight: 300;
+}
+
+#blog-desc {
+    font-weight: 250;
+}
+
+.blog-footer {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.39), rgba(255, 255, 255, 0.39)), #121212;
+    display: block;
+}
+
+/* ———————————————————————RESUME PAGE——————————————————————————————————————————————————————————————————————— */
+

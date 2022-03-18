@@ -2,11 +2,17 @@
 {% block title %} Malia Barker {% endblock %}
 {% block content %}
     <div class="container">
-        {% if logged_in == True %}
-            <p>Logged in as</p>
-        {% else %}
-            <p>Not logged in</p>
-        {% endif %}
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{url_for('static', filename='images/2022_resume.png')}}" alt="Resume" width="466px" height="555px" class="mt-5">
+            </div>
+            <div class="col-md-6 text-center d-flex flex-column align-items-center justify-content-center" id="resume-buttons">
+                <a href="/download_pdf"><button class="btn my-4" id="nav-contact" style="width: 200px;">Download as PDF</button></a> <br>
+                <a href="/download_docx"><button class="btn my-4" id="nav-contact" style="width: 200px;">Download as Word Doc</button></a> <br>
+                <button class="btn my-4" id="nav-contact" style="width: 200px;">View in Separate Window</button> <br>
+                <button class="btn my-4" id="nav-contact" style="width: 200px;">Contact Me!</button>
+            </div>
+        </div>
     </div>
     {% include 'partials/footer.html' %}
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, request_started, session, redirect, url_for
+from flask import Flask, render_template, request, request_started, session, redirect, url_for, send_file
 from flask_pymongo import pymongo
 import bcrypt
 import os
@@ -132,7 +132,67 @@ def delete_project(project_id):
 def blog():
     # returns blog page
     # able to CRUD blog posts
-    return render_template('blog.html', page_title='blog')
+    if request.method == 'POST':
+        post_type = request.form.get('type')
+        blog_post = {
+            'title': request.form.get('title'),
+            'description': request.form.get('description'),
+            'link': request.form.get('link'),
+            'date': request.form.get('date'),
+            'tags': request.form.get('tags'),
+            'type': post_type
+        }
+        if post_type == 'ds':
+            blog_post['kaggle_link'] = request.form.get('kaggle_link')
+        elif post_type == 'wd':
+            blog_post['live_link'] = request.form.get('live_link')
+
+        blog_posts.insert_one(blog_post)
+
+    all_blogposts = blog_posts.find()
+    blog_list = list(all_blogposts)
+
+    first_post = blog_list[0]
+    all_posts = blog_list[1:]
+
+    return render_template('blog.html', page_title='blog', blog_posts=all_posts, first_post=first_post)
+
+@app.route('/<post_id>/edit_post', methods=['GET', 'POST'])
+def edit_post(post_id):
+    '''Edit a project'''
+    print(post_id)
+    post = blog_posts.find_one({'_id': ObjectId(post_id)})
+    return render_template('edit_post.html', post=post)
+
+@app.route('/<post_id>/update_post', methods=['GET', 'POST'])
+def update_post(post_id):
+    '''Update a project'''
+    post_type = request.form.get('type')
+    updated_post = {
+        'title': request.form.get('title'),
+        'description': request.form.get('description'),
+        'link': request.form.get('link'),
+        'date': request.form.get('date'),
+        'tags': request.form.get('tags'),
+        'type': post_type
+    }
+    if post_type == 'ds':
+        updated_post['kaggle_link'] = request.form.get('kaggle_link')
+    elif post_type == 'wd':
+        updated_post['live_link'] = request.form.get('live_link')
+
+    blog_posts.update_one (
+        {'_id': ObjectId(post_id)},
+        {'$set': updated_post}
+    )
+
+    return redirect(url_for('blog', page_title='blog'))
+
+@app.route('/<post_id>/delete_post', methods=['GET', 'POST'])
+def delete_post(post_id):
+    '''Delete a project'''
+    blog_posts.delete_one({'_id': ObjectId(post_id)})
+    return redirect(url_for('blog', page_title='blog'))
 
 
 
@@ -143,6 +203,18 @@ def blog():
 def resume():
     # returns resume
     return render_template('resume.html', page_title='resume')
+
+@app.route('/download_pdf')
+def download_pdf():
+    path = "/Users/maliabarker/Desktop/main/MakeSchool/Term3/spring2022-intensive/static/images/2022_resume.pdf"
+    return send_file(path, as_attachment=True)
+
+@app.route('/download_docx')
+def download_docx():
+    print('download button clicked')
+    path = "/Users/maliabarker/Desktop/main/MakeSchool/Term3/spring2022-intensive/static/images/2022_resume.docx"
+    return send_file(path, as_attachment=True)
+
 
 @app.route('/admin', methods=['GET', 'POST'])
 def login():

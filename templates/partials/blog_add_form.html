@@ -1,0 +1,50 @@
+<form action="/blog" id="new_blogpost" method="post">
+    <div class="form-group">
+        <label for="title">Blog Title</label>
+        <input type="text" class="form-control" id="title" name="title">
+    </div>
+
+    <div class="form-group">
+        <label for="desc">Blog Description</label>
+        <input type="text" class="form-control" id="desc" name="description">
+    </div>
+
+    <div class="form-group">
+        <label for="link">Link To Article</label>
+        <input type="text" class="form-control" id="link" name="link">
+    </div>
+
+    <div class="form-group">
+        <label for="date">Date Written</label>
+        <input type="date" class="form-control" id="date" name="date">
+    </div>
+
+    <div class="form-group">
+        <label for="tags">Article Tags</label>
+        <input type="text" class="form-control" id="tags" name="tags">
+    </div>
+
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" onclick="javascript:radioCheck();" type="radio" name="type" id="ds" value="ds">
+        <label class="form-check-label" for="ds">Data Science Project</label>
+    </div>
+
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" onclick="javascript:radioCheck();" type="radio" name="type" id="live_app" value="wd">
+        <label class="form-check-label" for="live_app">Live Application</label>
+    </div>
+
+    <div class="form-group" id="ifds" style="display:none">
+        <label for="kaggle">Kaggle Link</label>
+        <input type="text" class="form-control" id="kaggle" name="kaggle_link">
+    </div>
+
+    <div class="form-group" id="iflive_app" style="display:none">
+        <label for="live_link">Live Link</label>
+        <input type="text" class="form-control" id="live_link" name="live_link">
+    </div>
+
+    <button type="submit" form="new_blogpost" class="btn btn-primary">Submit</button>
+</form>
+
+<script src="{{url_for('static', filename='js/radio.js')}}"></script>

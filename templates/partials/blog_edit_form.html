@@ -1,0 +1,42 @@
+<form action="/{{ post._id }}/update_post" id="edit_blogpost" method="post">
+    <div class="form-group">
+        <label for="title">Blog Title</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="{{ post.title }}" value="{{ post.title }}">
+    </div>
+
+    <div class="form-group">
+        <label for="desc">Blog Description</label>
+        <input type="text" class="form-control" id="desc" name="description" placeholder="{{ post.description }}" value="{{ post.description }}">
+    </div>
+
+    <div class="form-group">
+        <label for="link">Link To Article</label>
+        <input type="text" class="form-control" id="link" name="link" placeholder="{{ post.link }}" value="{{ post.link }}">
+    </div>
+
+    <div class="form-group">
+        <label for="date">Date Written</label>
+        <input type="date" class="form-control" id="date" name="date" placeholder="{{ post.date }}" value="{{ post.date }}">
+    </div>
+
+    <div class="form-group">
+        <label for="tags">Article Tags</label>
+        <input type="text" class="form-control" id="tags" name="tags" placeholder="{{ post.tags }}" value="{{ post.tags }}">
+    </div>
+
+    <input type="hidden" name="type" value="{{ post.type }}">
+
+    {% if post.type == 'ds' %}
+        <div class="form-group" id="ifds">
+            <label for="kaggle">Kaggle Link</label>
+            <input type="text" class="form-control" id="kaggle" name="kaggle_link" placeholder="{{ post.kaggle_link }}" value="{{ post.kaggle_link }}">
+        </div>
+    {% elif post.type == 'wd' %}
+        <div class="form-group" id="iflive_app">
+            <label for="live_link">Live Link</label>
+            <input type="text" class="form-control" id="live_link" name="live_link" placeholder="{{ post.live_link }}" value="{{ post.live_link }}">
+        </div>
+    {% endif %}
+
+    <button type="submit" form="edit_blogpost" class="btn btn-primary">Submit</button>
+</form>

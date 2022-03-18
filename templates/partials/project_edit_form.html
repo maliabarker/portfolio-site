@@ -24,6 +24,8 @@
         <input type="text" class="form-control" id="github" name="github" placeholder="{{ project.github }}" value="{{ project.github }}">
     </div>
 
+    <input type="hidden" name="type" value="{{ project.type }}">
+
     {% if project.type == 'ds' %}
         <div class="form-group" id="ifds">
             <label for="kaggle">Kaggle Link</label>

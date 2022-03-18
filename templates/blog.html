@@ -2,19 +2,30 @@
 {% block title %} Malia Barker {% endblock %}
 {% block content %}
 
-{# WILL BE USED WHEN I PUT BLOG POSTS INTO DATABASE
-{% set blog_posts = [
-    {% for post in posts %}
-        (section = post_section, title = post_title, text = post_text, date = post_date, tags = post_tags, link = post_link)
-    {% endfor %}
-] -%}
-{% set active_post = page_title|default('whateverIWant') -%}
-#}
-
     <div class="container-fluid">
         <div class="row">
             <!-- TODO Need to make sure it starts at edge of page and spans all the way down -->
             <div class="col-md-3" id="blog-sidebar" style="height: 100vh;">
+                {% if logged_in == True %}
+                    <button class="btn mt-5 my-sm-0 ml-5" type="button" data-bs-toggle="modal" data-bs-target="#newProjectModal" id="nav-contact">Add Project</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="newProjectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add New Project</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    {% include 'partials/blog_add_form.html' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+
+                <!-- DATA SCIENCE -->
                 <div class="navbar navbar-dark mt-4">
                     <div class="container-fluid">
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ds" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" style="border:none;">
@@ -25,10 +36,23 @@
 
                 <div class="collapse" id="ds">
                     <div class="p-4 ml-2">
-                        <p class="text-white">Collapsed content</p>
+                        <ul class="nav nav-pills mb-3 d-flex flex-column" id="pills-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a style="border-radius: 15px" class="nav-link active" id="pills-{{ first_post._id }}-tab" data-toggle="pill" href="#pills-{{ first_post._id }}" role="tab" aria-controls="pills-{{ first_post._id }}" aria-selected="true">{{ first_post.title }}</a>
+                            </li>
+                            
+                            {% for post in blog_posts %}
+                                {% if post.type == 'ds' %}
+                                    <li class="nav-item" role="presentation">
+                                        <a style="border-radius: 15px" class="nav-link" id="pills-{{ post._id }}-tab" data-toggle="pill" href="#pills-{{ post._id }}" role="tab" aria-controls="pills-{{ post._id }}" aria-selected="true">{{ post.title }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
 
+                <!-- WEB DEVELOPMENT -->
                 <div class="navbar navbar-dark">
                     <div class="container-fluid">
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#wd" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" style="border:none;">
@@ -39,35 +63,122 @@
 
                 <div class="collapse" id="wd">
                     <div class="p-4 ml-2">
-                        <p class="text-white">Collapsed content</p>
+                        <ul class="nav nav-pills mb-3 d-flex flex-column" id="pills-tab" role="tablist">
+                            {% for post in blog_posts %}
+                                {% if post.type == 'wd' %}
+                                    <li class="nav-item" role="presentation">
+                                        <a style="border-radius: 15px" class="nav-link" id="pills-{{ post._id }}-tab" data-toggle="pill" href="#pills-{{ post._id }}" role="tab" aria-controls="pills-{{ post._id }}" aria-selected="true">{{ post.title }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-7 col-offset-1 ml-auto mt-5 mb-5 py-4 px-5" id="blog-post">
-                <!-- Jinja for loop for blog posts 
-                How to do check if clicked on ds or wd? 
-                And then show blog posts accordingly -->
-                <h2 class="pb-3" >Title of Blog Post</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                <a href="">
-                    <p><u>Read More ...</u></p>
-                </a>
-                <div class="blog-footer container">
-                    <div class="row d-flex justify-content-center">
-                        <p>🗓</p>
-                        <p>📁</p>
-                        <p>🏷</p>
+            <div class="col-md-7 col-offset-1 ml-auto mt-5 py-4 px-5 d-flex flex-column" id="blog-post" style="height: 70vh;">
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-{{ first_post._id }}" role="tabpanel" aria-labelledby="pills-{{ first_post._id }}-tab">
+                        <div class="container">
+                            <h2 class="pb-3 mt-4" id="blog-title">{{ first_post.title }}</h2>
+                            <p id="blog-desc">{{ first_post.description }}</p>
+                            <a href="">
+                                <p>
+                                    <a href="{{ first_post.link }}">
+                                        <u>Read More ...</u>
+                                    </a>
+                                </p>
+                            </a>
+
+                            <div class="blog-footer mt-auto">
+                                <div class="row justify-content-around">
+                                    <!-- d-flex justify-content-around align-items-end -->
+                                    <p>🗓 {{ first_post.date }} </p>
+                                    <p>📁 {{ first_post.type }} </p>
+                                    <p>🏷 {{ first_post.tags }} </p>
+                                </div>
+                                {% if first_post.type == 'wd' %}
+                                <p>
+                                    <a href="{{ first_post.live_link }}">
+                                        <u>Open Live Application</u>
+                                    </a>
+                                </p>
+                                {% elif first_post.type == 'ds' %}
+                                <p>
+                                    <a href="{{ first_post.kaggle_link }}">
+                                        <u>Open Kaggle Notebook</u>
+                                    </a>
+                                </p>
+                                {% endif %}
+                            </div>
+                            {% if logged_in == True %}
+                                <div class="row">
+                                    <form action="/{{ first_post._id }}/edit_post" id="edit_{{ first_post._id }}">
+                                        <button type="submit" form="edit_{{ first_post._id }}" class="btn my-2 my-sm-0 mr-2" id="nav-contact">Edit Blog Post</button>
+                                    </form>
+                                    <form action="/{{ first_post._id }}/delete_post" id="delete_{{ first_post._id }}">
+                                        <button type="submit" form="delete_{{ first_post._id }}" class="btn my-2 my-sm-0 ml-2" id="nav-contact">Delete Blog Post</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
                     </div>
-                    <a href="">
-                        <p><u>link</u></p>
-                    </a>
+
+                    {% for post in blog_posts %}
+                        <div class="tab-pane fade" id="pills-{{ post._id }}" role="tabpanel" aria-labelledby="pills-{{ post._id }}-tab">
+                            <div class="container">
+                                <h2 class="pb-3 mt-4" id="blog-title">{{ post.title }}</h2>
+                                <p id="blog-desc">{{ post.description }}</p>
+                                <a href="">
+                                    <p>
+                                        <a href="{{ post.link }}">
+                                            <u>Read More ...</u>
+                                        </a>
+                                    </p>
+                                </a>
+
+                                <div class="blog-footer mt-auto">
+                                    <div class="row justify-content-around">
+                                        <!-- d-flex justify-content-around align-items-end -->
+                                        <p>🗓 {{ post.date }} </p>
+                                        <p>📁 {{ post.type }} </p>
+                                        <p>🏷 {{ post.tags }} </p>
+                                    </div>
+                                    {% if post.type == 'wd' %}
+                                    <p>
+                                        <a href="{{ post.live_link }}">
+                                            <u>Open Live Application</u>
+                                        </a>
+                                    </p>
+                                    {% elif post.type == 'ds' %}
+                                    <p>
+                                        <a href="{{ post.kaggle_link }}">
+                                            <u>Open Kaggle Notebook</u>
+                                        </a>
+                                    </p>
+                                    {% endif %}
+                                </div>
+                                {% if logged_in == True %}
+                                    <div class="row">
+                                        <form action="/{{ post._id }}/edit_post" id="edit_{{ post._id }}">
+                                            <button type="submit" form="edit_{{ post._id }}" class="btn my-2 my-sm-0 mr-2" id="nav-contact">Edit Blog Post</button>
+                                        </form>
+                                        <form action="/{{ post._id }}/delete_post" id="delete_{{ post._id }}">
+                                            <button type="submit" form="delete_{{ post._id }}" class="btn my-2 my-sm-0 ml-2" id="nav-contact">Delete Blog Post</button>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-            <div class="col-md-1">
-
-            </div>
+            <div class="col-md-1"></div>
         </div>
     </div>
     {% include 'partials/footer.html' %}
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 {% endblock %}

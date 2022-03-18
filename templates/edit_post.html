@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container" id="edit-post-container">
+        <h1 class="mt-5 pt-2">Edit {{ post.title }}</h1>
+        {% include 'partials/blog_edit_form.html' %}
+    </div>
+{% endblock %}
