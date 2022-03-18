@@ -14,7 +14,7 @@ PASSWORD = os.environ.get('PASSWORD')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 # connecting to mongodb atlas database
-CONNECTION_STRING = f'mongodb+srv://malia-barker:{PASSWORD}@cluster0.upbvp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+CONNECTION_STRING = os.environ.get('CONNECTION_STRING')
 client = pymongo.MongoClient(CONNECTION_STRING)
 db = client.get_default_database()
 
