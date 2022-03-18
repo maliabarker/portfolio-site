@@ -29,7 +29,7 @@ users = db.users
 if len(list(users.find())) == 0:
     admin = {
         'email':      'maliabarker@icloud.com',
-        'password':   bcrypt.hashpw((password).encode('utf-8'), bcrypt.gensalt())
+        'password':   bcrypt.hashpw((PASSWORD).encode('utf-8'), bcrypt.gensalt())
     }
     users.insert_one(admin)
 
