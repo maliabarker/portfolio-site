@@ -4,14 +4,13 @@ import bcrypt
 import os
 import dotenv
 from bson.objectid import ObjectId
-import logging
 
 app = Flask(__name__)
 
 # accessing env variables
 dotenv.load_dotenv('.env')
 PASSWORD = os.environ.get('PASSWORD')
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = 'supersecretkey'
 
 # connecting to mongodb atlas database
 CONNECTION_STRING = 'mongodb+srv://malia-barker:supersecretpassword@cluster0.upbvp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
@@ -30,7 +29,7 @@ users = db.users
 if len(list(users.find())) == 0:
     admin = {
         'email':      'maliabarker@icloud.com',
-        'password':   bcrypt.hashpw((PASSWORD).encode('utf-8'), bcrypt.gensalt())
+        'password':   bcrypt.hashpw(('supersecretpassword').encode('utf-8'), bcrypt.gensalt())
     }
     users.insert_one(admin)
 
