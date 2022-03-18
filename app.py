@@ -14,9 +14,10 @@ PASSWORD = os.environ.get('PASSWORD')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 # connecting to mongodb atlas database
-CONNECTION_STRING = os.environ.get('CONNECTION_STRING')
+CONNECTION_STRING = 'mongodb+srv://maliabarker:tpofbawf@cluster0.upbvp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 client = pymongo.MongoClient(CONNECTION_STRING)
 db = client.get_default_database()
+assert db.name == 'myFirstDatabase'
 
 ### DATABASE COLLECTIONS ###
 blog_posts = db.blog_posts
