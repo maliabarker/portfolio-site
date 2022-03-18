@@ -34,7 +34,7 @@
                     <div class="slider-content">
                         {% for project in projects %}
                             <div class="slider-single card text-center" style="display: flex; align-items: center;">
-                                <img class="slider-single-image card-img-top mt-3" src="{{ project.path }}" alt="1" style="width: 370px; height: 270px;"/>
+                                <img class="slider-single-image card-img-top mt-3" src="/static/images/{{ project.path }}" alt="1" style="width: 370px; height: 270px;"/>
                                 <h3 class="card-title mt-3 slider-single-title">{{ project.title }}</h3>
                                 {% if logged_in == True %}
                                     <div class="row">
@@ -52,13 +52,13 @@
                                     <a href="{{ project.github }}">
                                         <i class="fa-brands fa-github mx-3 h3"></i>
                                     </a>
-                                    {% if post_type == ds %}
+                                    {% if project.type == 'ds' %}
                                     <a href="{{ project.kaggle_link }}">
                                         <i class="fa-brands fa-kaggle mx-3 h3"></i>
                                     </a>
-                                    {% elif post_type == live_app %}
+                                    {% elif project.type == 'live_app' %}
                                     <a href="{{ project.live_link }}">
-                                        <span class="iconify" data-icon="simple-icons:heroku"></span>
+                                        <span class="iconify" data-icon="simple-icons:heroku" id="heroku_icon" style="font-size:2em;"></span>
                                     </a>
                                     {% endif %}
                                 </div>
