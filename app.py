@@ -4,6 +4,7 @@ import bcrypt
 import os
 import dotenv
 from bson.objectid import ObjectId
+import logging
 
 app = Flask(__name__)
 
